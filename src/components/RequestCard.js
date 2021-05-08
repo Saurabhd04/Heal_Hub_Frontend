@@ -31,9 +31,9 @@ const RequestCard = (props) => {
     setData((prevData) => {
       return {
         ...prevData,
-        "prescription_field": event.target.checked,
-        "pid": id,
-        "did": did,
+        prescription_field: event.target.checked,
+        pid: id,
+        did: did,
       };
     });
   };
@@ -46,7 +46,7 @@ const RequestCard = (props) => {
     console.log(data);
 
     axios
-      .post(url+"/api/v1/accessverification/", data, {
+      .post(url + "/api/v1/accessverification/", data, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -61,12 +61,11 @@ const RequestCard = (props) => {
 
   return (
     <>
-      {console.log(props.value)}
-      <div className="profile-inner">
+      {/* <div className="profile-inner">
         <div className="">
           <div className="">
             <h3>Patient Detail</h3>
-            <hr/>
+            <hr />
             <div className="row">
               <div className="col-2">
                 <strong>UserID : </strong>
@@ -97,14 +96,54 @@ const RequestCard = (props) => {
                 onChange={onChangeHandler}
               />
             </div>
-            <hr/>
+            <hr />
             <div className="col align-centre">
-            <button onClick={handleSubmit} className="btn btn-dark col ">
-              Request
-            </button>
+              <button onClick={handleSubmit} className="btn btn-dark col ">
+                Request
+              </button>
             </div>
           </div>
         </form>
+      </div> */}
+      <div className="table-inner">
+        <h3>Request Patient Detail</h3>
+        <table className="table table-boardered table-info">
+          <tbody>
+            <tr>
+              <th className="w-25">ID:</th>
+              <td>{id}</td>
+            </tr>
+            <tr>
+              <th className="w-25">Username:</th>
+              <td>{username}</td>
+            </tr>
+            <tr>
+              <th className="w-25">Phone Number:</th>
+              <td>{phone_number}</td>
+            </tr>
+            <tr>
+              <th className="w-25">Prescribtion Field</th>
+              <td>
+                <input
+                  type="checkbox"
+                  className="checkbox-container  col-1"
+                  placeholder=""
+                  name="prescription_field"
+                  checked={pField.prescription_field}
+                  onChange={onChangeHandler}
+                />
+              </td>
+            </tr>
+            <tr className="table-danger">
+              <th className="w-25">Make Request:</th>
+              <td>
+                <button onClick={handleSubmit} className="btn btn-dark">
+                  Request
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </>
   );

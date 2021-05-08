@@ -8,7 +8,7 @@ const DProfileCard = () => {
   const [showModal, setShowModal] = useState(false);
   const toggleShowModal = () => {
     setShowModal((prevData) => !prevData);
-    console.log(showModal);
+    
   };
 
   const { state } = useContext(loginContext);
@@ -24,26 +24,31 @@ const DProfileCard = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(
-        url + `/api/v1/MedicalPractitionerInfoDetail/` + state.user.id,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Token " + state.token,
-          },
-        }
-      );
-      setData((prevData) => {
-        return {
-          ...prevData,
-          name: response.data[0]["name"],
-          licenseNumber: response.data[0]["licenseNumber"],
-          mobileNumber: response.data[0]["mobileNumber"],
-          profile: response.data[0]["profile"],
-          address: response.data[0]["address"],
-          orgId: response.data[0]["orgId"],
-        };
-      });
+     let response = null;
+      try {
+          response = await axios.get(
+          url + `/api/v1/MedicalPractitionerInfoDetail/` + state.user.id,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Token " + state.token,
+            },
+          }
+        );
+        setData((prevData) => {
+          return {
+            ...prevData,
+            name: response.data[0]["name"],
+            licenseNumber: response.data[0]["licenseNumber"],
+            mobileNumber: response.data[0]["mobileNumber"],
+            profile: response.data[0]["profile"],
+            address: response.data[0]["address"],
+            orgId: response.data[0]["orgId"],
+          };
+        });
+      } catch (err) {
+        console.log(err.response);
+      };
     };
     fetchData();
   },[url, state]);

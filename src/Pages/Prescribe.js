@@ -59,7 +59,7 @@ const Prescribe = () => {
   return (
     <>
       <div className="content-inner">
-        <h1>Prescribe Page</h1>
+        <p className="bold-300">Prescribe Page</p>
         <hr />
         <form onSubmit={handleSubmit}>
           <div className="form-row">

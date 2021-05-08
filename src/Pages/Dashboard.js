@@ -5,7 +5,7 @@ const Dashboard = () => {
   return (
     <>
     <div className="content-inner">
-      <h1>Welcome to Healhub Dashboard!</h1>
+      <p className="bold-300">Dashboard</p>
       <hr />
       <ProfileCard />
     </div>  

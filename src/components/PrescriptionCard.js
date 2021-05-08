@@ -13,32 +13,53 @@ const PrescriptionCard = (props) => {
     notes,
   } = props.data;
 
-  //   const handleDelete = () => {
-  //     props.onSelect(props.id);
-  //   };
-
   return (
     <>
-        <tr className="col">
-          <td>{prescriberId}</td>
-          <td>{hospitalOrClinic}</td>
-          <td>{doctorName}</td>
-          <td>{prescriptionDate}</td>
-          <td>{contactNumber}</td>
-          <td>{address}</td>
-          <td>{symptoms}</td>
-          <td>{medicines}</td>
-          <td>{notes}</td>
-          {/* <td>
-          <button
-            className="btn-sm btn-danger"
-            type="submit"
-            onClick={handleDelete}
-          >
-            Delete
-          </button>
-        </td> */}
-        </tr>
+      <div className="table-inner">
+        <table
+          className="table table-bordered table-success"
+          id="invoice-table"
+        >
+          <tbody>
+            <tr>
+              <th className="w-25">Prescriber Id</th>
+              <td>{prescriberId}</td>
+            </tr>
+            <tr>
+              <th className="w-25">Hospital or Clinic</th>
+              <td>{hospitalOrClinic}</td>
+            </tr>
+            <tr>
+              <th className="w-25">Doctor's Name</th>
+              <td>{doctorName}</td>
+            </tr>
+            <tr>
+              <th className="w-25">Date</th>
+              <td>{prescriptionDate}</td>
+            </tr>
+            <tr>
+              <th className="w-25">Contact Number</th>
+              <td>{contactNumber}</td>
+            </tr>
+            <tr>
+              <th className="w-25">Address</th>
+              <td>{address}</td>
+            </tr>
+            <tr>
+              <th className="w-25">Symptoms</th>
+              <td>{symptoms}</td>
+            </tr>
+            <tr>
+              <th className="w-25">Medicines</th>
+              <td>{medicines}</td>
+            </tr>
+            <tr>
+              <th className="w-25">Notes</th>
+              <td>{notes}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };

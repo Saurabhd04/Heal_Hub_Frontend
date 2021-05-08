@@ -10,12 +10,11 @@ const Prescription = () => {
 
   const [prescriptions, setPrescriptions] = useState([]);
 
-
-  useEffect(
-    () => {
-      const getData = async () => {
+  useEffect(() => {
+    const getData = async () => {
+      try {
         const response = await axios.get(
-          url+`/api/v1/PrescriptionInfoOfSpecificUser/`,
+          url + `/api/v1/PrescriptionInfoOfSpecificUser/`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -24,64 +23,36 @@ const Prescription = () => {
           }
         );
         setPrescriptions(response.data);
-        //console.log(response.data);
-        // console.log(prescriptions);
+      } catch (err) {
+        console.log(err.response);
       }
+    };
+    getData();
+  }, [state.token, url]);
 
-      getData();
-    },
-    [state.token, url]
-  );
-
-  const generatePDF = () => {
-    window.print();
-  };
+  // const generatePDF = () => {
+  //   window.print();
+  // };
 
   return (
     <>
       <div className="content-inner" id="invoice">
-      <div className="row">
-        <div className="col">
-          <h1>Medical Prescription History</h1>
+        <div className="align-centre">
+          <div className="col">
+            <p className="bold-300">Medical Prescriptions</p>
+          </div>
+          {/* <div className="col">
+            <button className="btn  btn-primary btn-sm" onClick={() => generatePDF()}>
+              Generate PDF
+            </button>
+          </div> */}
         </div>
-        <div className="col-2">
-          <button className="btn btn-primary" onClick={() => generatePDF()}>Generate PDF</button>
-        </div>  
-      </div>  
         <hr />
         <div className="">
-          <table
-            className="table table-boardered table-striped"
-            id="invoice-table"
-          >
-            <thead className="thead-dark">
-              <tr bgcolor="">
-                <th scope="col">Prescriber Id</th>
-                <th scope="col">Hospital or Clinic</th>
-                <th scope="col">Doctor's Name</th>
-                <th scope="col">Date</th>
-                <th scope="col">Contact Number</th>
-                <th scope="col">Address</th>
-                <th scope="col">Symptoms</th>
-                <th scope="col">Medicines</th>
-                <th scope="col">Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-              {prescriptions.map((value, index) => {
-                return (
-                  <PrescriptionCard
-                    data={value}
-                    key={index}
-                    id={value.id}
-                    //onSelect={deleteItem}
-                  />
-                );
-              })} 
-            </tbody>
-          </table>
+          {prescriptions.map((value, index) => {
+            return <PrescriptionCard data={value} key={index} id={value.id} />;
+          })}
         </div>
-        
       </div>
     </>
   );

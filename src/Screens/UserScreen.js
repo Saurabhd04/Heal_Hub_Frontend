@@ -33,32 +33,38 @@ const UserScreen = () => {
 
   return (
     <>
-      <div className="sec-body-container-after-login">
-        <div className="row">
-            <div className="menu-body-container">
-              <Menu />
-            </div>
-            <div className="content-container">
-              <Switch>
-                {/* <Route exact path="/userscreen" component={UserScreen} /> */}
-                <Route exact path="/dashboard" component={Dashboard} />
-                <Route exact path="/profile" component={Profile} />
-                <Route exact path="/insurance" component={Insurance} />
-                <Route exact path="/prescription" component={Prescription} />
-                <Route exact path="/prescribe" component={Prescribe} />
-                <Route exact path="/finduser" component={FindUser} />
-                <Route exact path="/prediction" component={Prediction} />
-                <Route exact path="/patientdetailaccess" component={PatientDetailAccess} />
-                <Route exact path="/patientdetailaccess/accessbyid" component={AccessById} />
-                <Route exact path="/patientdetailaccess/accessbyfp" component={AccessByFP} />
-                <Route exact path="/detailaccess" component={DetailAccess} />
-                <Route exact path="/ddashboard" component={DDashboard} />
-                <Route exact path="/doctorslist" component={DoctorsList} />
-                
-                <Route exact path="/error" component={ErrorScreen} />
-              </Switch>
-            </div>
-        </div>
+      <div className="menu-body-container" id="no-print">
+        <Menu />
+      </div>
+      <div className="content-container">
+        <Switch>
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/insurance" component={Insurance} />
+          <Route exact path="/prescription" component={Prescription} />
+          <Route exact path="/prescribe" component={Prescribe} />
+          <Route exact path="/finduser" component={FindUser} />
+          <Route exact path="/prediction" component={Prediction} />
+          <Route
+            exact
+            path="/patientdetailaccess"
+            component={PatientDetailAccess}
+          />
+          <Route
+            exact
+            path="/patientdetailaccess/accessbyid"
+            component={AccessById}
+          />
+          <Route
+            exact
+            path="/patientdetailaccess/accessbyfp"
+            component={AccessByFP}
+          />
+          <Route exact path="/detailaccess" component={DetailAccess} />
+          <Route exact path="/ddashboard" component={DDashboard} />
+          <Route exact path="/doctorslist" component={DoctorsList} />
+          <Route exact path="/error" component={ErrorScreen} />
+        </Switch>
       </div>
     </>
   );

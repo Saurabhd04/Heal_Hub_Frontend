@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { urlContext } from "../App";
-
+import registrationimg from "../assets/Images/HEALHUB-REGISTRATION.png";
 
 const RegisterScreen = () => {
   const url = useContext(urlContext);
@@ -37,7 +37,7 @@ const RegisterScreen = () => {
     }
     setInput(input);
     await axios
-      .post(url+"/api/auth/register", input, {
+      .post(url + "/api/auth/register", input, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -51,113 +51,92 @@ const RegisterScreen = () => {
       })
       .catch((error) => console.log(error.response.request._response));
     console.log("Registered");
-    history.push('/otpscreen');
+    history.push("/otpscreen");
   };
 
   return (
     <>
-      <div className="sec-body-container">
-        <div className="inner">
-          <form onSubmit={handleSubmit}>
-            <h3>Register</h3>
-
-            <div className="form-group">
-              <label  className="font-small" >Username</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter Username"
-                name="username"
-                onChange={onChangeHandler}
-                value={input.username}
-              />
-            </div>
-
-            <div className="form-group">
-              <label  className="font-small" >Email</label>
-              <input
-                type="email"
-                className="form-control"
-                placeholder="Enter Email"
-                name="email"
-                onChange={onChangeHandler}
-                value={input.email}
-              />
-            </div>
-
-            <div className="form-group">
-              <label  className="font-small" >Phone Number</label>
-              <input
-                type=""
-                className="form-control"
-                placeholder="Enter Phone number"
-                name="phone_number"
-                onChange={onChangeHandler}
-                value={input.phone_number}
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="font-small">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Enter Password"
-                name="password"
-                onChange={onChangeHandler}
-                value={input.password}
-              />
-            </div>
-
-            <div className="form-group">
-              <div className="row align-centre">
-                <label className="col font-small">
-                  Want to register as Medical Practitioner?
-                </label>
+      
+        <div className="login-content-inner">
+          
+          <img className="home-1-img" src={registrationimg} alt="#" />
+         
+          <div className="auth-inner">
+            <form onSubmit={handleSubmit}>
+              <p className="bold-300">
+              <span class="material-icons">person_add </span>Register
+              </p>
+              <div className="form-group">
+                <label className="font-small">Username</label>
                 <input
-                  type="checkbox"
-                  className="checkbox-container col"
-                  placeholder="Click only if you are Medical Practitioner"
-                  name="is_MP"
-                  checked={input.is_MP}
+                  type="text"
+                  className="form-control form-control-sm"
+                  placeholder="Enter Username"
+                  name="username"
                   onChange={onChangeHandler}
+                  value={input.username}
                 />
               </div>
-            </div>
 
-            {/* <div className="form-group">
-              <div className="row searchrow">
-                <label className="col">
-                  Want to register as Pharmacy User?
-                </label>
+              <div className="form-group">
+                <label className="font-small">Email</label>
                 <input
-                  type="checkbox"
-                  className="form-control col"
-                  placeholder="Click only if you are Pharmacy User"
-                  name="is_pharma"
-                  checked={input.is_pharma}
+                  type="email"
+                  className="form-control form-control-sm"
+                  placeholder="Enter Email"
+                  name="email"
                   onChange={onChangeHandler}
+                  value={input.email}
                 />
               </div>
-            </div> */}
 
-            <button type="submit" className="btn btn-dark btn-lg btn-block">
+              <div className="form-group">
+                <label className="font-small">Phone Number</label>
+                <input
+                  type=""
+                  className="form-control form-control-sm"
+                  placeholder="Enter Phone number"
+                  name="phone_number"
+                  onChange={onChangeHandler}
+                  value={input.phone_number}
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="font-small">Password</label>
+                <input
+                  type="password"
+                  className="form-control form-control-sm"
+                  placeholder="Enter Password"
+                  name="password"
+                  onChange={onChangeHandler}
+                  value={input.password}
+                />
+              </div>
+
+              <div className="form-group">
+                <div className="row align-centre">
+                  <label className="col font-small">
+                    Want to register as Medical Practitioner?
+                  </label>
+                  <input
+                    type="checkbox"
+                    className="checkbox-container col"
+                    placeholder="Click only if you are Medical Practitioner"
+                    name="is_MP"
+                    checked={input.is_MP}
+                    onChange={onChangeHandler}
+                  />
+                </div>
+              </div>
+
+              <button type="submit" className="btn btn-dark btn-sm">
                 Register
-            </button>
-
-            <p className="forgot-password text-right">
-              Already registered{" "}
-              <Link
-                className="txt"
-                to="/login"
-                style={{ textDecoration: "none" }}
-              >
-                Login ?
-              </Link>
-            </p>
-          </form>
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
+     
     </>
   );
 };

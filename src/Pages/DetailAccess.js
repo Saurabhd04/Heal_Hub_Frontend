@@ -5,7 +5,7 @@ import PrescriptionCard from "../components/PrescriptionCard";
 
 const DetailAccess = () => {
   const url = useContext(urlContext);
-  const {state} = useContext(loginContext);
+  const { state } = useContext(loginContext);
   const [data, setData] = useState({
     did: "",
     pid: "",
@@ -22,7 +22,7 @@ const DetailAccess = () => {
       return { ...prevData, [name]: value };
     });
     setData((prevData) => {
-      return { ...prevData, "did": state.user.id };
+      return { ...prevData, did: state.user.id };
     });
     // console.log(data);
   };
@@ -35,7 +35,7 @@ const DetailAccess = () => {
     // setPres([]);
 
     await axios
-      .post(url+"/api/v1/accessprescription/", data, {
+      .post(url + "/api/v1/accessprescription/", data, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -58,18 +58,20 @@ const DetailAccess = () => {
       });
   };
 
-
   return (
     <>
       <div className="content-inner">
-        <h3>Detail Access</h3>
-        <p><strong>Note: </strong>This tool must be used once the patient has granted you the access to their medical reports.</p>
+        <p className="bold-300">Detail Access</p>
+        <p>
+          <strong>Note: </strong>This tool must be used once the patient has
+          granted you the access to their medical reports.
+        </p>
         <hr />
         <form onSubmit={handleSubmit}>
           <div className="form-row">
             <div className="form-group col">
               <label>Patient ID/ User ID</label>
-              <div className="row align-centre">
+              <div className="row  align-centre">
                 <div className="col-9">
                   <input
                     type="number"
@@ -98,30 +100,9 @@ const DetailAccess = () => {
                 <div className="col">
                   <h3>User Prescription</h3>
                   <hr />
-                  <table
-                    className="col table"
-                  >
-                    <thead className="thead-dark">
-                      <tr bgcolor="">
-                        <th scope="col">Prescriber Id</th>
-                        <th scope="col">Hospital or Clinic</th>
-                        <th scope="col">Doctor's Name</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Contact Number</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Symptoms</th>
-                        <th scope="col">Medicines</th>
-                        <th scope="col">Notes</th>
-                      </tr>
-                    </thead>
-                    <tbody className="">
-                      {pres.map((p, index) => {
-                        return (
-                          <PrescriptionCard data={p} key={index} id={index} />
-                        );
-                      })}
-                    </tbody>
-                  </table>
+                  {pres.map((p, index) => {
+                    return <PrescriptionCard data={p} key={index} id={index} />;
+                  })}
                 </div>
               </div>
             ) : (

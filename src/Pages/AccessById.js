@@ -4,7 +4,7 @@ import axios from "axios";
 import RequestCard from "../components/RequestCard";
 
 const AccessById = () => {
-  const {state} = useContext(loginContext);
+  const { state } = useContext(loginContext);
   const url = useContext(urlContext);
 
   const [id, setID] = useState({
@@ -38,8 +38,8 @@ const AccessById = () => {
     setOtp((prevData) => {
       return {
         ...prevData,
-        "pid": localStorage.getItem("pid"),
-        "did": state.user.id,
+        pid: localStorage.getItem("pid"),
+        did: state.user.id,
       };
     });
   };
@@ -50,7 +50,7 @@ const AccessById = () => {
     }
 
     await axios
-      .post(url+"/api/v1/otpaccessverification/", otp, {
+      .post(url + "/api/v1/otpaccessverification/", otp, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -83,105 +83,103 @@ const AccessById = () => {
       });
     setUser(res);
     console.log(res);
-    
   };
-
-  
 
   useEffect(() => {
     const fetchData = async () => {
-      let res = await axios.get(url+"/api/auth/userlist");
+      let res = await axios.get(url + "/api/auth/userlist");
       //console.log(res.data);
       let temp = res.data
         .map((item) => item)
         .filter((mp) => {
           return mp.is_MP === false;
         });
-        
-      setNames(temp);
-    }
-    fetchData();
 
+      setNames(temp);
+    };
+    fetchData();
   }, [url]);
 
   return (
     <>
       <div className="content-inner">
-        <h3>Access by Patient Identiy Number</h3>
-        <p><strong>Note: </strong> When you make a request, An OTP will be generated and sent to user's phone number. Enter the One Time Password below to get access.</p>
-        <hr/>
-        <div className="container2 request-card2">
-          <div className="col">
-            <form onSubmit={handleSubmit}>
-              <div className="dark-card">
-                <div className="form-group col">
-                  <label>
-                    <strong>Patient ID/User ID</strong>
-                  </label>
-                  <div className="row align-centre">
-                    <div className="col-8">
-                      <input
-                        type="number"
-                        className="form-control"
-                        id=""
-                        placeholder="Enter Patient ID"
-                        name="pid"
-                        value={id.pid}
-                        onChange={handleInputChange}
-                      />
-                    </div>
-                    <div className="col-4">
-                      <button type="submit" className="btn btn-primary">
-                        Search Patient
-                      </button>
-                    </div>
+        <p className="bold-300">Access by Patient's Identity Number</p>
+        <p>
+          <strong>Note: </strong> When you make a request, An OTP will be
+          generated and sent to user's phone number. Enter the One Time Password
+          below to get access to patient's data.
+        </p>
+        <hr />
+        <div className="">
+          <form onSubmit={handleSubmit}>
+            <div className="dark-card">
+              <div className="form-group col">
+                <label>
+                  <strong>Patient ID/User ID</strong>
+                </label>
+                <div className="row align-centre">
+                  <div className="col-8">
+                    <input
+                      type="number"
+                      className="form-control"
+                    
+                      placeholder="Enter Patient ID"
+                      name="pid"
+                      value={id.pid}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="col">
+                    <button type="submit" className="btn btn-primary">
+                      Search Patient
+                    </button>
                   </div>
                 </div>
               </div>
-            </form>
-            <div className="">
-              {user ? (
-                user.map((u) => (
-                  <RequestCard key={u.id} value={u} did={state.user.id} />
-                ))
-              ) : (
-                <div className="request-card2">
-                  <p>
-                    <strong>Note:</strong> Currently you have not searched any
-                    Patient ID/User ID
-                  </p>
-                </div>
-              )}
             </div>
-            <hr/>
-            <form onSubmit={handleOTPSubmit}>
-              <div className="dark-card">
-                <div className="form-group col">
-                  <label>
-                    <strong>OTP</strong>
-                  </label>
-                  <div className="row align-centre">
-                    <div className="col-8">
-                      <input
-                        type="number"
-                        className="form-control"
-                        id=""
-                        placeholder="Enter One Time Password after making request"
-                        name="otp"
-                        value={otp.otp}
-                        onChange={handleOTPInputChange}
-                      />
-                    </div>
-                    <div className="col-4">
-                      <button type="submit" className="btn btn-primary">
-                        Verify OTP
-                      </button>
-                    </div>
+          </form>
+          <div className="">
+            {user ? (
+              user.map((u) => (
+                <RequestCard key={u.id} value={u} did={state.user.id} />
+              ))
+            ) : (
+              <div className="">
+                <p>
+                  <strong>Note:</strong> Currently you have not searched any
+                  Patient ID/User ID
+                </p>
+              </div>
+            )}
+          </div>
+          <hr />
+          <form onSubmit={handleOTPSubmit}>
+            <div className="dark-card">
+              <div className="form-group col">
+                <label>
+                  <strong>OTP</strong>
+                </label>
+                <div className="row align-centre">
+                  <div className="col-8">
+                    <input
+                      type="number"
+                      className="form-control"
+                    
+                      placeholder="Enter One Time Password after making request"
+                      name="otp"
+                      value={otp.otp}
+                      onChange={handleOTPInputChange}
+                    />
+                  </div>
+                  <div className="col-4">
+                    <button type="submit" className="btn btn-primary">
+                      Verify OTP
+                    </button>
                   </div>
                 </div>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
     </>

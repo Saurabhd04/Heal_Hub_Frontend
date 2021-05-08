@@ -1,86 +1,151 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "./assets/Images/healhub-logo.png";
 import { loginContext } from "./App";
 
 const Navbar = () => {
   const { state, dispatch } = useContext(loginContext);
-  
+
   const logoutHandler = () => {
     dispatch({
       type: "LOGOUT",
     });
+  };
 
+  const [click, setClick] = useState(false);
+  const [menu, setMenu] = useState(false);
+
+  const handleClick = () => {
+    setClick(!click);
   };
 
   return (
     <>
-      <nav className="nav-container navbar navbar-expand-lg">
-        <div className="container-fluid">
-        
-          <img src={logo} alt="HEALHUB" height="40px" />
-    
-          <div className="">
-            <ul className="navbar-nav  align-centre">
-              {state.isAuthenticated ? (
-                <>
-                <div className="row align-centre">
+      <div className="nav-container">
+        <div className="white nav-logo">
+          {state.isAuthenticated ? (
+            <>
+              <h6 className="align-centre lobster-font logo">
+                <span className="material-icons">health_and_safety</span>HealHub
+              </h6>
+              <div className="burger-menu-list">
+                <button
+                  onClick={() => setMenu(!menu)}
+                  className="burger-menu-button"
+                >
+                  <span className="material-icons">menu</span>
+                </button>
+                {state.user.is_MP ? (
+                  <>
+                    <div className={"menu-dropdown" + (menu ? " active" : "")}>
+                      <Link to="/ddashboard" onClick={() => setMenu(!menu)} ><div>Dashboard</div></Link>
+                      <Link to="/prescribe" onClick={() => setMenu(!menu)} ><div>Prescribe</div></Link>
+                      <Link to="/finduser" onClick={() => setMenu(!menu)} ><div>Find User</div></Link>
+                      <Link to="/prediction" onClick={() => setMenu(!menu)} ><div>Disease Prediction Tool</div></Link>
+                      <Link to="/patientdetailaccess" onClick={() => setMenu(!menu)} ><div>Access Verification Tool</div></Link>
+                      <Link to="/detailaccess" onClick={() => setMenu(!menu)} ><div>Patient Detail Access</div></Link>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className={"menu-dropdown" + (menu ? " active" : "")}>
+                      <Link to="/dashboard" onClick={() => setMenu(!menu)}><div>Dashboard</div></Link>
+                      <Link to="/profile" onClick={() => setMenu(!menu)}><div>Profile</div></Link>
+                      <Link to="/insurance" onClick={() => setMenu(!menu)}><div>Insurance</div></Link>
+                      <Link to="/prescription" onClick={() => setMenu(!menu)}><div>Prescription</div></Link>
+                      <Link to="/doctorslist" onClick={() => setMenu(!menu)}><div>Doctor's List</div></Link>
+                    </div>
+                  </>
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+              <h6 className="align-centre lobster-font">
+                <span className="material-icons">health_and_safety</span>HealHub
+              </h6>
+            </>
+          )}
+        </div>
+
+        <div className="nav-list">
+          <ul>
+            {state.isAuthenticated ? (
+              <>
+                <div className="nav-logged-ul">
                   <li className="nav-item white">
-                    <strong> Logged in as : {state.user.username} </strong>
+                    Logged in as:- {state.user.username}
                   </li>
-                
+
                   <li className="nav-item">
-                  <Link
-                  to="/"
-                  >
-                    <button
-                      className="btn btn-primary btn-sm"
-                      onClick={logoutHandler}
-                    >
-                      Logout
-                    </button>
-                  </Link>  
+                    <Link to="/">
+                      <button
+                        className="btn btn-primary btn-sm"
+                        onClick={logoutHandler}
+                      >
+                        Logout
+                      </button>
+                    </Link>
                   </li>
                 </div>
-
-               </> 
-              ) : (
-                <>
-                <div className="row  align-centre">
+              </>
+            ) : (
+              <>
+                <div className="nav-ul">
                   <li className="nav-item">
                     <Link
-                        className="txt"
-                        to="/"
-                        style={{ textDecoration: "none" }}
-                      >
-                       <h6 style={{paddingRight:20}}> Home </h6>
+                      className="txt align-centre"
+                      to="/"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <span className="material-icons">home</span> Home
+                    </Link>
+                  </li>
+                  <li className="nav-item ">
+                    <Link
+                      className="txt align-centre"
+                      to="/login"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <span className="material-icons">login</span> Login
                     </Link>
                   </li>
                   <li className="nav-item">
                     <Link
-                        className="txt"
-                        to="/login"
-                        style={{ textDecoration: "none" }}
-                      >
-                       <h6 style={{paddingRight:20}}> Login </h6>
+                      className="txt align-centre"
+                      to="/register"
+                      style={{ textDecoration: "none" }}
+                    > 
+                        <span class="material-icons">person_add </span>
+                       Register
                     </Link>
                   </li>
-                  <li className="nav-item">
-                     <Link
-                        className="txt"
-                        to="/register"
-                        style={{ textDecoration: "none" }}
-                      >
-                        <h6 style={{paddingRight:20}}>Register</h6>
-                    </Link>
-                  </li>
-                  </div>
-                </>
-              )}
-            </ul>
-          </div>
+                </div>
+              </>
+            )}
+          </ul>
         </div>
-      </nav>
+        {state.isAuthenticated ? (
+          <></>
+        ) : (
+          <div className="burger-list">
+            <button onClick={handleClick} className="burger-button">
+              <span className="material-icons">menu</span>
+            </button>
+            <div className={"dropdown" + (click ? " active" : "")}>
+              <Link to="/"  onClick={handleClick} style={{ textDecoration: "none" }}>
+                <div className="">Home</div>
+              </Link>
+              <Link to="/login"  onClick={handleClick} style={{ textDecoration: "none" }}>
+                <div className="">Login</div>
+              </Link>
+              <Link to="/register"  onClick={handleClick} style={{ textDecoration: "none" }}>
+                <div className="">Register</div>
+              </Link>
+            </div>
+            
+          </div>
+        )}
+      </div>
     </>
   );
 };

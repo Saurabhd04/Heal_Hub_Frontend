@@ -63,31 +63,27 @@ function App() {
 
   return (
     <>
-      <div className="body-container">
-        <loginContext.Provider
-          value={{
-            state,
-            dispatch,
-          }}
-        >
-          <urlContext.Provider value={url}>
-            <div className="">
-              <Navbar />
-              <div className="">
-                {verify ? (
-                  state.isAuthenticated ? (
-                    <UserScreen />
-                  ) : (
-                    <OnboardingScreen />
-                  )
-                ) : (
-                  <AuthScreen />
-                )}
-              </div>
-            </div>
-          </urlContext.Provider>
-        </loginContext.Provider>
-      </div>
+      <loginContext.Provider
+        value={{
+          state,
+          dispatch,
+        }}
+      >
+        <urlContext.Provider value={url}>
+          <Navbar />
+          <div className="sec-body-container">
+            {verify ? (
+              state.isAuthenticated ? (
+                <UserScreen />
+              ) : (
+                <OnboardingScreen />
+              )
+            ) : (
+              <AuthScreen />
+            )}
+          </div>
+        </urlContext.Provider>
+      </loginContext.Provider>
     </>
   );
 }

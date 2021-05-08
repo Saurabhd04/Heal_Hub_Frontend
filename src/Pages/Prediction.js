@@ -179,7 +179,7 @@ const Prediction = () => {
   const handleSubmit = async () => {
     console.log(symptoms);
     await axios
-      .post(url+"/api/v1/prediction/", symptoms, {
+      .post(url + "/api/v1/prediction/", symptoms, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Token " + state.token,
@@ -190,7 +190,7 @@ const Prediction = () => {
         setDiseases(res.data);
       })
       .catch((error) => {
-        console.log(error.response)
+        console.log(error.response);
         alert("Data input is inappropriate. Try again");
       });
   };
@@ -200,87 +200,119 @@ const Prediction = () => {
   return (
     <>
       <div className="content-inner">
-        <h3>DISEASE PREDICTION TOOL</h3>
-        <p><strong >Note: </strong>Use this tool to have insight on the type of disease the patient is experiencing based on
-          symptoms</p>
+        <p className="bold-300">DISEASE PREDICTION TOOL</p>
+        <p>
+          <strong>Note: </strong>Use this tool to have insight on the type of
+          disease the patient is experiencing based on symptoms
+        </p>
         <hr />
         <div className="profile-inner">
-        <p><strong>Note: </strong> Select 5 symptoms</p>
-        <div className="row">
-          <div className="col-5">
-            <img className="dp-img" src={DP} alt="#" />
-          </div>
-          <div className="col-7">
-            <select id="s1" name="s1" className="form-control select-dropdown" onChange={handleChange}>
+          <p>
+            <strong>Note: </strong> Select atleast 3 symptoms to generate a prediction.
+          </p>
+
+          <div className="input-col">
+            <select
+              id="s1"
+              name="s1"
+              className="form-control select-dropdown"
+              onChange={handleChange}
+            >
               {items.map((item, index) => (
                 <option key={index} value={item.value}>
                   {item.label}
                 </option>
               ))}
             </select>
-            <select id="s2" name="s2" className="form-control select-dropdown" onChange={handleChange}>
+            <select
+              id="s2"
+              name="s2"
+              className="form-control select-dropdown"
+              onChange={handleChange}
+            >
               {items.map((item, index) => (
                 <option key={index} value={item.value}>
                   {item.label}
                 </option>
               ))}
             </select>
-            <select id="s3" name="s3" className="form-control select-dropdown" onChange={handleChange}>
+            <select
+              id="s3"
+              name="s3"
+              className="form-control select-dropdown"
+              onChange={handleChange}
+            >
               {items.map((item, index) => (
                 <option key={index} value={item.value}>
                   {item.label}
                 </option>
               ))}
             </select>
-            <select id="s4" name="s4" className="form-control  select-dropdown" onChange={handleChange}>
+            <select
+              id="s4"
+              name="s4"
+              className="form-control  select-dropdown"
+              onChange={handleChange}
+            >
               {items.map((item, index) => (
                 <option key={index} value={item.value}>
                   {item.label}
                 </option>
               ))}
             </select>
-            <select id="s5" name="s5" className="form-control  select-dropdown" onChange={handleChange}>
+            <select
+              id="s5"
+              name="s5"
+              className="form-control  select-dropdown"
+              onChange={handleChange}
+            >
               {items.map((item, index) => (
                 <option key={index} value={item.value}>
                   {item.label}
                 </option>
               ))}
             </select>
-          
+
             <button className="btn btn-dark" onClick={handleSubmit}>
               Predict
             </button>
-          
           </div>
         </div>
-        </div>
-        <hr/>
+        <hr />
         <div className="profile-inner">
-        <h3>Disease Predictions</h3>
-        <div className="row">
-          <div className="col-6">
-            {diseases.length === 0 ? (
-              <div>
-              <p><strong>Note:</strong> You have not predicted anything.</p>
-                <ul className="ul-list">
-                  <li className="li-list">NULL</li>
-                </ul>
-              </div>
-            ) : (
-              <div>
-                <p><strong>Note:</strong> The patient may be suffering from these diseases.</p>
-                <ul className="ul-list">
+          <h3>Predicted Diseases</h3>
+          <div className="input-row">
+            <div className="">
+              {diseases.length === 0 ? (
+                <div className="">
+                  <p>
+                    <strong>Note:</strong> You have not predicted anything.
+                  </p>
+                  <div className="">
+                    <div className="li-list">NULL</div>
+                  </div >
+                </div>
+              ) : (
+                <div>
+                  <p>
+                    <strong>Note:</strong> The patient may be suffering from
+                    these diseases.
+                  </p>
+
                   {diseases.map((disease, index) => (
-                    <li key={index} className="li-list">{disease}</li>
+                    <div className="input-row">
+                      <div key={index} className="col li-list">
+                        {disease}
+                      </div>
+                    </div>
                   ))}
-                </ul>
-              </div>
-            )}
+                </div>
+              )}
+            </div>
+            <div className="col">
+              <img className="home-1-img" src={DP} alt="#" />
+            </div>
           </div>
-          <div className="col-4">
-            <img className="dp-img" src={DP} alt="#" />
-          </div>
-        </div>  
         </div>
       </div>
     </>

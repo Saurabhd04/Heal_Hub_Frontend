@@ -9,7 +9,7 @@ const PatientDetailAccess = () => {
   return (
     <>
       <div className="content-inner">
-        <h3>Access Verification Tool</h3>
+        <p className="bold-300">Access Verification Tool</p>
         <p><strong>Note: </strong>Use Access by fingerprint in those cases where the patient is unconscious or is incapable of communication.</p>
         <div className="profile-inner"><PDANav/></div>
         <div className="container">

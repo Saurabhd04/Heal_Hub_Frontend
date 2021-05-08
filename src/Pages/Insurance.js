@@ -2,12 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import InsuranceCard from "../components/InsuranceCard";
 import InsuranceForm from "../Forms/InsuranceForm";
 import axios from "axios";
-import { Divider } from "@material-ui/core";
+
 import { loginContext, urlContext } from "../App";
 
 const Insurance = () => {
   const url = useContext(urlContext);
-  const {state} = useContext(loginContext);
+  const { state } = useContext(loginContext);
 
   const [insurances, setInsurances] = useState([]);
 
@@ -33,9 +33,9 @@ const Insurance = () => {
       return { ...prevData, [name]: value };
     });
 
-    setInsuranceInfo((prevData)=> {
-      return {...prevData, "userId":state.user.token}
-    })
+    setInsuranceInfo((prevData) => {
+      return { ...prevData, userId: state.user.token };
+    });
   };
 
   const handleSubmit = (event) => {
@@ -51,10 +51,10 @@ const Insurance = () => {
 
     //AXIOS POST Request
     axios
-      .post(url+"/api/v1/InsuranceInfo/", insuranceInfo, {
+      .post(url + "/api/v1/InsuranceInfo/", insuranceInfo, {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Token " + state.token,
+          Authorization: "Token " + state.token,
         },
       })
       .then((response) => {
@@ -68,31 +68,28 @@ const Insurance = () => {
   //AXIOS GET REQUEST
   useEffect(() => {
     const getData = async () => {
-      const response = await axios.get(
-        url+`/api/v1/InsuranceInfo/`,
-        {
+      try {
+        const response = await axios.get(url + `/api/v1/InsuranceInfo/`, {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": "Token " + state.token,
+            Authorization: "Token " + state.token,
           },
-        }
-      );
-      // console.log(response.data);
-      setInsurances(response.data);
-    }
+        });
+        setInsurances(response.data);
+      } catch (err) {
+        console.log(err.response);
+      }
+    };
 
     getData();
-
   }, [state.token, url]);
 
   //AXIOS DELETE REQUEST
   const deleteItem = async (id) => {
     await axios
-      .delete(
-        url+"/api/v1/InsuranceInfo/" + JSON.stringify(id),
-        { data: { id: id }
-       }
-      )
+      .delete(url + "/api/v1/InsuranceInfo/" + JSON.stringify(id), {
+        data: { id: id },
+      })
       .then((res) => {
         console.log(res);
       })
@@ -112,52 +109,40 @@ const Insurance = () => {
   return (
     <>
       <div className="content-inner">
-      <div className="profile-inner">
-        <div className="row">
-          <div className="col">
-            <h1>Update Insurance Information</h1>
+        
+          <div className="align-centre">
+            <div className="col-9">
+              <p className="bold-300">Insurance Information</p>
+            </div>
+            <div className="col">
+              <button
+                onClick={toggleShowModal}
+                className="btn btn-primary btn-sm"
+              >
+                Add
+              </button>
+            </div>
           </div>
-          <div className="col-2">  
-            <button onClick={toggleShowModal} className="btn btn-primary">
-              Add
-            </button>
-          </div>  
-        </div>  
-        <InsuranceForm
-          showModal={showModal}
-          setShowModal={setShowModal}
-          handleSubmit={handleSubmit}
-          handleInputChange={handleInputChange}
-          insuranceInfo={insuranceInfo}
-        />
+          <InsuranceForm
+            showModal={showModal}
+            setShowModal={setShowModal}
+            handleSubmit={handleSubmit}
+            handleInputChange={handleInputChange}
+            insuranceInfo={insuranceInfo}
+          />
+          <hr/>
 
-        <Divider />
+          {insurances.map((value, index) => {
+            return (
+              <InsuranceCard
+                data={value}
+                key={index}
+                id={value.id}
+                onSelect={deleteItem}
+              />
+            );
+          })}
 
-        <table
-          className="col table table-boardered"
-        >
-          <thead className="thead-dark">
-            <tr>
-              <th scope="col">Provider</th>
-              <th scope="col">Valid Till</th>
-              <th scope="col">Policy Name</th>
-              <th scope="col">Policy Number</th>
-            </tr>
-          </thead>
-          <tbody>
-            {insurances.map((value, index) => {
-              return (
-                <InsuranceCard
-                  data={value}
-                  key={index}
-                  id={value.id}
-                  onSelect={deleteItem}
-                />
-              );
-            })}
-          </tbody>
-        </table>
-        </div>
       </div>
     </>
   );

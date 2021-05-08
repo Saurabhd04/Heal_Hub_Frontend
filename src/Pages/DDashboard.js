@@ -4,7 +4,7 @@ const DDashboard = () => {
   return (
     <>
       <div className="content-inner">
-        <h1>Dashboard</h1>
+        <p className="bold-300">Dashboard</p>
         <hr />
         <div className="profile-inner">
          <DProfileCard/>
