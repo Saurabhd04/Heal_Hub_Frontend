@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { loginContext, urlContext } from "../App";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const Prescribe = () => {
   const url = useContext(urlContext);
@@ -32,10 +33,11 @@ const Prescribe = () => {
     if (event) {
       event.preventDefault();
     }
+   
     console.log(prescription);
 
     await axios
-      .post(url+"/api/v1/PrescriptionInfo/", prescription, {
+      .post(url + "/api/v1/PrescriptionInfo/", prescription, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Token " + state.token,
@@ -43,14 +45,21 @@ const Prescribe = () => {
       })
       .then((res) => {
         console.log(res);
-        if(res.status===200) {
-          alert(res.data + " Kindly contact your oragnization to activate your ID");
-        } else if(res.status === 201) {
-          alert("Prescribed successfully.Tell the patient to check his Medical History");
+        if (res.status === 200) {
+          toast.warning(
+            "Kindly contact your organization to activate your account."
+          );
+        } else if (res.status === 201) {
+          toast.success("Prescribed successfully");
         }
       })
-      .catch((error) => console.log(error.response.request._response));
+      .catch((error) => {
+        console.log(error.response.request._response);
+        toast.error("This didn't work");
+      });
   };
+
+ 
 
   useEffect(() => {
     //Run this effect when state.user changes

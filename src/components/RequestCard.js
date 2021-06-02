@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { urlContext } from "../App";
+import toast from "react-hot-toast";
 
 const RequestCard = (props) => {
   const url = useContext(urlContext);
@@ -45,6 +46,11 @@ const RequestCard = (props) => {
     localStorage.setItem("pid", id);
     console.log(data);
 
+    if(!data.prescription_field) {
+      toast.error("Kindly select a field.")
+      return;
+    }
+
     axios
       .post(url + "/api/v1/accessverification/", data, {
         headers: {
@@ -53,58 +59,20 @@ const RequestCard = (props) => {
       })
       .then((response) => {
         console.log(response);
+        toast.success(`One Time Password sending to:- ${phone_number}`, {
+          duration: 8000,
+        });
       })
-      .catch((error) => console.log(error.response));
+      .catch((error) => {
+        console.log(error);
+        toast.error("There was some error. Please try again");
+      });
   };
 
   useEffect(() => {}, [pField.prescription_field, data]);
 
   return (
     <>
-      {/* <div className="profile-inner">
-        <div className="">
-          <div className="">
-            <h3>Patient Detail</h3>
-            <hr />
-            <div className="row">
-              <div className="col-2">
-                <strong>UserID : </strong>
-                {id}
-              </div>
-              <div className="col-4">
-                <strong>Username :</strong> {username}
-              </div>
-              <br></br>
-              <div className="col-6">
-                <strong>Phone Number :</strong> {phone_number}
-              </div>
-            </div>
-          </div>
-        </div>
-        <form>
-          <div className="form-group">
-            <div className="row">
-              <label className="col-5">
-                <strong>Prescribtion Field</strong>
-              </label>
-              <input
-                type="checkbox"
-                className="checkbox-container  col-1"
-                placeholder=""
-                name="prescription_field"
-                checked={pField.prescription_field}
-                onChange={onChangeHandler}
-              />
-            </div>
-            <hr />
-            <div className="col align-centre">
-              <button onClick={handleSubmit} className="btn btn-dark col ">
-                Request
-              </button>
-            </div>
-          </div>
-        </form>
-      </div> */}
       <div className="table-inner">
         <h3>Request Patient Detail</h3>
         <table className="table table-boardered table-info">

@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { loginContext, urlContext } from "../App";
 import axios from "axios";
 import RequestCard from "../components/RequestCard";
+import toast from "react-hot-toast";
 
 const AccessById = () => {
   const { state } = useContext(loginContext);
@@ -59,17 +60,21 @@ const AccessById = () => {
         console.log(response);
 
         if (response.status === 200) {
-          alert(response.data);
+          // alert(response.data);
+          toast.error(`${response.data}`);
         } else if (response.status === 201) {
-          alert("OTP verified");
+          // alert("OTP verified");
+          toast.success("One Time Password verified.");
         }
       })
       .catch((error) => {
         console.log(error.response);
-        alert("No User Available for this OTP");
+        // alert("No User Available for this OTP");
+        toast.error("OTP is incorrect.");
       });
 
     console.log(otp);
+    
   };
 
   const handleSubmit = (event) => {
@@ -82,7 +87,10 @@ const AccessById = () => {
         return parseInt(id.pid) === parseInt(n.id);
       });
     setUser(res);
-    console.log(res);
+    if(res.length===0) {
+      toast.error("No account exist with this ID.");
+    }
+    // console.log(res);
   };
 
   useEffect(() => {

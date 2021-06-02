@@ -5,6 +5,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Oleo+Script&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 html {
   height: 100%;
@@ -16,8 +17,9 @@ body {
   min-height: 100%;
   width: 100%;
   overflow: hidden;
-  font-family: "Roboto", "Lobster", "sans-serif", cursive;
-  background-color: #393e46;
+  font-family: "Roboto","Poppins", "sans-serif", cursive;
+  /* background-color: #393e46; */
+  /* background-image: linear-gradient(to left,#393e46, #2d3436, #393e46); */
 }
 
 @media print {
@@ -30,6 +32,15 @@ a {
   color: #ffffff;
 }
 
+a:hover {
+  color: #ffffff;
+}
+
+.txt-1 {
+  font-size: 20px;
+  font-weight: 200;
+}
+
 button:focus {
   outline: none;
 }
@@ -40,6 +51,15 @@ button:active {
 
 .lobster-font {
   font-family: "Lobster";
+}
+
+.poppins-font {
+  font-family: "Poppins";
+}
+
+.roboto-font {
+  font-family: "Roboto";
+  font-weight: 700;
 }
 
 .icon-size {
@@ -55,6 +75,17 @@ button:active {
   color: #ee5a6f;
 }
 
+.clickable-icon {
+  color: #3ad49c;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.clickable-icon:hover {
+  
+  transform: scale(1.2);
+}
+
 li {
   list-style: none;
 }
@@ -68,6 +99,13 @@ li {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+}
+
+.input-row-1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .input-col {
@@ -86,9 +124,16 @@ li {
 
 .li-font:hover {
   background-color: #333333;
+  background: linear-gradient(to right, #393e46, #2d3436, #393e46); 
+  border-radius: 2px;
+  margin: 5px;
+  transition: 0.5s;
 }
+
 .active {
-  background: linear-gradient(to right, #333333 95%, #a7d7c5 5%);
+  background: linear-gradient(to right, #393e46, #2d3436, #393e46 95%, #a7d7c5 5%);
+  border-radius: 2px;
+  margin: 5px;
 }
 
 .bold-900 {
@@ -132,9 +177,7 @@ li {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: flex-start ; */
   overflow-y: scroll;
-  /* border: red 2px solid; */
 }
 
 .menu-body-container {
@@ -142,6 +185,7 @@ li {
   left: 0px;
   height: 100vh;
   width: 250px;
+  background-image: linear-gradient(to bottom,#212521, #2d3436, #212521);
   background-color: #212529;
   z-index: 1;
   overflow: scroll;
@@ -169,12 +213,12 @@ ul .menu-ul-list li {
   padding-left: 20px;
   padding-right: 20px;
   overflow-y: scroll;
-
+  
 }
 
 .nav-container {
   width: 100%;
-  background-color: #212529;
+  background-image: linear-gradient(to right,#212521, #212531, #212521, #212521);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
   z-index: 2;
   display: flex;
@@ -236,6 +280,10 @@ ul .menu-ul-list li {
   margin: 3px;
 }
 
+.home-btn {
+  height: 40px;
+}
+
 .txt {
   color: #ffffff;
   margin: 0px 10px 0px 10px;
@@ -245,11 +293,6 @@ ul .menu-ul-list li {
   background-color: #00587a;
 }
 
-/* .input_field {
-  width: 500px;
-  padding: 10px;
-} */
-
 .card {
   border-radius: 5px;
   box-shadow: 20;
@@ -257,8 +300,6 @@ ul .menu-ul-list li {
   width: 500px;
   margin-top: 5px;
 }
-
-/* ---------------------------------------- */
 
 .inner {
   width: 450px;
@@ -272,18 +313,18 @@ ul .menu-ul-list li {
 
 .auth-inner {
   width: 450px;
-  margin: auto;
   background: #ffffff;
-  padding: 40px 40px 40px 40px;
+  padding: 40px;
   border-radius: 15px;
-  transition: all 0.3s;
+  transition: all 0.6s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
 .content-inner {
   width: 89%;
   height: 88%;
   margin-top: 20px;
-  background: #ffffff;
+  background-image: linear-gradient(to right,#f6f6f6, #ffffff, #f6f6f6);
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
   padding: 40px 40px 40px 40px;
   border-radius: 5px;
@@ -294,18 +335,20 @@ ul .menu-ul-list li {
 .home-content-inner {
   width: 100%;
   height: auto;
-  background: #ffffff;
-  padding: 90px;
-  margin: 10px;
-  border-radius: 10px;
+  
+  padding: 90px 100px 90px 100px;
   transition: all 0.3s;
-
-  background-image: url("./assets/Images/HEALHUB-BUBBLES.png");
-  background-size: cover;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  
+
+  background-color: #212121;
+  color: white;
+  border-radius: 0px 0px 50px 0px;
+
+
 }
 
 .qrcode {
@@ -325,27 +368,41 @@ ul .menu-ul-list li {
 
 .home-content-inner2 {
   width: 100%;
-  height: 120vh;
   background: #ffffff;
-  padding: 40px;
-  margin: 10px;
-  border-radius: 10px;
+  padding: 30px;
   transition: all 0.3s;
-
-  background-image: url("./assets/Images/HEALHUB-BUBBLES.png");
-  background-size: cover;
+ 
+  /* background-image: url("./assets/Images/HEALHUB-BUBBLES.png");
+  background-size: cover; */
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   /* border: red 2px solid; */
 }
 
 .home-content-inner2-inner {
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  
+}
+
+.home-content-inner2-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #212529;
+  
+}
+.home-content-inner2-footer-inner {
+  height: 100px;
+  color: white;
+ 
 }
 
 .heading {
@@ -353,28 +410,35 @@ ul .menu-ul-list li {
 
 }
 
-/* .sec-login-body-container {
-  height: 100%;
-  width: 100%;
-} */
-
 .login-content-inner {
-  background: #ffffff;
-  border-radius: 10px;
+  background-color: #a7d7c5;
+  background-image: linear-gradient(315deg,#3ad49c, #a7d7c5 40%, #fffcff 0%);
+  /* border-radius: 10px; */
   transition: all 0.3s;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
-  padding: 100px 130px 100px 130px;
+  width: 100%;
+  height: 100%;
+  padding: 100px;
 }
 
 .x-axis-scroll {
   overflow-x: scroll;
 }
 
+.homelogo {
+  height: 100px;
+  width: auto;
+}
+
 .home-1-img {
+  height: 350px;
+  width: auto;
+}
+
+.auth-img {
   height: 500px;
   width: auto;
 }
@@ -408,7 +472,7 @@ ul .menu-ul-list li {
   padding: 5px;
   border-radius: 10px;
   transition: all 0.3s;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .stakeholders-inner {
@@ -497,7 +561,8 @@ p {
   height: 80%;
   width: 100%;
   background-color: white;
-  overflow-x: scroll;
+  overflow: scroll;
+
 }
 
 .light-card {
@@ -513,13 +578,10 @@ p {
 .gradient-card {
   border-radius: 5px;
   box-shadow: 20;
-  min-width: 200px;
-  max-width: 200px;
   padding: 10px;
   padding-top: 30px;
   height: 100%;
-  background-image: linear-gradient(to bottom, #ee5a6f, #f29263);
-  z-index: 1;
+  background-image: linear-gradient(to right, #252525, #3b3b3b);
 }
 
 .profile-container {
@@ -563,9 +625,73 @@ p {
   text-align: center;
 }
 
+.healhub-frontline {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px 30px;
+}
+
+.register-home-container {
+  width: 100%;
+}
+
+
+.register-dropdown {
+  position: relative;
+  opacity: 0;
+  z-index: 10;
+  top: 10px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  
+  justify-content: space-around;
+  border-radius: 5px;
+  padding: 10px;
+  pointer-events: none;
+  transition: all 0.4s;
+ 
+}
+
+.register-dropdown.active {
+  opacity: 1.0;
+  pointer-events: all;
+} 
+
+.hover-li {
+  padding: 10px 20px;
+  width: 95%;
+  transition: all 0.5s;
+}
+
+.hover-li:hover {
+  background-color: #282c34;
+  border-radius: 10px;
+}
+
+.image-container {
+  height: 100px;
+  width: auto;
+  border: black 2px solid;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.custom-btn {
+  
+ 
+  width: 100px;
+  border-radius: 10px;
+  background-color: #00587a;
+  color: white;
+
+}
+
 /*---------------------------MEDIA QUERY FOR 1221 PX-----------------------------------------*/
 
-@media only screen and (max-width: 1221px) {
+@media only screen and (max-width: 1221px), screen and (max-height:751px )  {
   .bold-900 {
     font-size: 70px;
   }
@@ -581,14 +707,25 @@ p {
     height: 300px;
   }
 
+  .auth-img {
+    height: 400px;
+  }
+  
+
   .home-2-img {
     height: 300px;
   }
+
+  .login-content-inner {
+    padding: 30px;
+  }
+
+
 }
 
 /*---------------------------MEDIA QUERY FOR 885 PX-----------------------------------------*/
 
-@media only screen and (max-width: 885px) {
+@media only screen and (max-width: 885px ) , screen and (max-height:575px )  {
   .bold-900 {
     font-size: 50px;
   }
@@ -600,6 +737,7 @@ p {
 
   .bold-300 {
     font-size: 30px;
+    height: 30px;
   }
 
   .icon-size-sm {
@@ -611,11 +749,26 @@ p {
 
   .home-1-img {
     height: 250px;
-    width: auto;
+    margin-top: 10px;
   }
+
+  .auth-img {
+    height: 250px;
+  }
+  
 
   .home-2-img {
     height: 250px;
+  }
+
+  .homelogo {
+    height: 60px;
+    width: auto;
+  }
+
+  .txt-1 {
+    font-size: 15px;
+    text-align: center;
   }
 
   h1 {
@@ -625,19 +778,20 @@ p {
   .home-content-inner {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
-    padding: 30px;
+    padding: 100px 30px 30px 30px;
+
+  }
+
+  .healhub-frontline {
+    align-items: center;
   }
 
   .qr-container {
     align-items: center;
   }
 
-  .auth-inner {
-    width: 280px;
-    padding: 10px;
-  }
 
   .login-content-inner {
     padding: 30px;
@@ -670,7 +824,7 @@ p {
     display: flex;
   }
 
-  
+
   .burger-menu-button {
     position: absolute;
     top: 20px;
@@ -708,7 +862,7 @@ p {
 
 /*---------------------------MEDIA QUERY FOR 455 PX-----------------------------------------*/
 
-@media only screen and (max-width: 455px) {
+@media only screen and (max-width: 455px) , screen and (max-height:500px )   {
   .qrcode {
     height: 100px;
     width: 100px;
@@ -724,12 +878,13 @@ p {
   }
 
   .bold-500 {
-    font-size: 30px;
+    font-size: 40px;
     height: 30px;
   }
 
   .bold-300 {
     font-size: 20px;
+    height: 20px;
   }
 
   .icon-size-sm {
@@ -744,9 +899,13 @@ p {
   }
 
   .home-1-img {
+    height: 150px;
+  }
 
+  .auth-img {
     display: none;
   }
+  
 
   .home-2-img {
     display: none;
@@ -761,7 +920,7 @@ p {
   }
 
   .btn {
-    font-size: 10px;
+    font-size: 15px;
   }
 
   .body-container {
@@ -773,13 +932,12 @@ p {
     height: 50px;
     display: flex;
     flex-direction: row;
-  
   }
 
   .burger-button {
     position: relative;
     margin-right: 10px;
-    background-color: #212529;
+    background-color: #212521;
     color: white;
     border: none;
   }
@@ -807,19 +965,40 @@ p {
     pointer-events: all;
   }
 
+  .content-container {
+    padding: 0px;
+  }
+
   .content-inner {
     width: 100%;
-    height: 88%;
+  
     padding: 10px;
+    margin-top: 0px;
+   
   }
 
   .input-row {
     flex-direction: column;
     justify-content: center;
-   
+
   }
 
   .profile-inner {
     padding: 20px;
+  }
+
+  .login-content-inner {
+    flex-direction: column;
+    padding-top: 0px;
+  }
+
+   .auth-inner {
+    width: 300px;
+    padding: 10px 20px;
+   
+  }
+
+  .home-content-inner2-inner {
+    flex-direction: column;
   }
 }

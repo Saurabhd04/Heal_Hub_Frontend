@@ -5,6 +5,7 @@ import OnboardingScreen from "./Screens/OnboardingScreen";
 import Navbar from "./Navbar";
 import React from "react";
 import AuthScreen from "./Screens/AuthScreen";
+import { Toaster } from "react-hot-toast";
 
 export const loginContext = React.createContext();
 //const url = "http://127.0.0.1:8000"; //Use this for local
@@ -71,7 +72,10 @@ function App() {
       >
         <urlContext.Provider value={url}>
           <Navbar />
+          <Toaster position="top-center" reverseOrder={true} />
+
           <div className="sec-body-container">
+            
             {verify ? (
               state.isAuthenticated ? (
                 <UserScreen />

@@ -64,51 +64,53 @@ const LoginScreen = () => {
 
   return (
     <>
-      {error ? (
-        <ErrorScreen />
-      ) : (
-        <div className="login-content-inner">
-           <img className="home-1-img" src={loginimg} alt="#" />
-          <form onSubmit={handleSubmit} className="auth-inner">
-            <p className="bold-300">
-              <span className=" material-icons">login</span>Log in
-            </p>
-            <div className="form-group">
-              <label>Username</label>
-              <input
-                type="text"
-                className="form-control  form-control-sm"
-                placeholder="Enter username"
-                name="username"
-                onChange={onChangeHandler}
-                value={log.username}
-              />
-            </div>
+      <div className="sec-home-body-container">
+        {error ? (
+          <ErrorScreen />
+        ) : (
+          <div className="login-content-inner">
+            <img className="auth-img" src={loginimg} alt="#" />
+            <form onSubmit={handleSubmit} className="auth-inner">
+              <p className=" align-centre  bold-300">
+                <span className="material-icons">login</span>Log in
+              </p>
+              <div className="form-group">
+                <label>Username</label>
+                <input
+                  type="text"
+                  className="form-control  form-control-sm"
+                  placeholder="Enter username"
+                  name="username"
+                  onChange={onChangeHandler}
+                  value={log.username}
+                />
+              </div>
 
-            <div className="form-group">
-              <label>Password</label>
-              <input
-                type="password"
-                className="form-control form-control-sm"
-                placeholder="Enter password"
-                name="password"
-                onChange={onChangeHandler}
-                value={log.password}
-              />
-            </div>
+              <div className="form-group">
+                <label>Password</label>
+                <input
+                  type="password"
+                  className="form-control form-control-sm"
+                  placeholder="Enter password"
+                  name="password"
+                  onChange={onChangeHandler}
+                  value={log.password}
+                />
+              </div>
 
-            <button type="submit" className="btn btn-dark btn-sm">
-              Sign in
-            </button>
-            <hr />
+              <button type="submit" className="btn btn-dark btn-sm">
+                Sign in
+              </button>
+              <hr />
 
-            <p>
-              By signing in you're accepting the{" "}
-              <strong>terms of service</strong>
-            </p>
-          </form>
-        </div>
-      )}
+              <p>
+                By signing in you're accepting the
+                <strong>terms of service</strong>
+              </p>
+            </form>
+          </div>
+        )}
+      </div>
     </>
   );
 };

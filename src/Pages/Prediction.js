@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { loginContext, urlContext } from "../App";
 import DP from "../assets/Images/diseasePrediction.jpg";
+import toast from "react-hot-toast";
 
 const Prediction = () => {
   const [items] = useState([
@@ -187,11 +188,12 @@ const Prediction = () => {
       })
       .then((res) => {
         console.log(res.data);
+        toast.success("Predicted Successfully!");
         setDiseases(res.data);
       })
       .catch((error) => {
         console.log(error.response);
-        alert("Data input is inappropriate. Try again");
+        toast.error("Data input is inappropriate. Try again");
       });
   };
 

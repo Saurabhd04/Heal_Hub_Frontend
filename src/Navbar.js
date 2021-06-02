@@ -24,7 +24,7 @@ const Navbar = () => {
         <div className="white nav-logo">
           {state.isAuthenticated ? (
             <>
-              <h6 className="align-centre lobster-font logo">
+              <h6 className="align-centre poppins-font logo">
                 <span className="material-icons">health_and_safety</span>HealHub
               </h6>
               <div className="burger-menu-list">
@@ -60,8 +60,8 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <h6 className="align-centre lobster-font">
-                <span className="material-icons">health_and_safety</span>HealHub
+              <h6 className="align-centre">
+                HealHub
               </h6>
             </>
           )}
@@ -115,7 +115,7 @@ const Navbar = () => {
                       to="/register"
                       style={{ textDecoration: "none" }}
                     > 
-                        <span class="material-icons">person_add </span>
+                        <span className="material-icons">person_add </span>
                        Register
                     </Link>
                   </li>
@@ -142,7 +142,6 @@ const Navbar = () => {
                 <div className="">Register</div>
               </Link>
             </div>
-            
           </div>
         )}
       </div>

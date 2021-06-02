@@ -2,9 +2,9 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { urlContext } from "../App";
-import registrationimg from "../assets/Images/HEALHUB-REGISTRATION.png";
+import registrationimg from "../assets/Images/HEALHUB-ABOUT.png";
 
-const RegisterScreen = () => {
+const DoctorRegisterScreen = () => {
   const url = useContext(urlContext);
   let history = useHistory();
 
@@ -13,7 +13,7 @@ const RegisterScreen = () => {
     email: "",
     phone_number: "",
     password: "",
-    is_MP: false,
+    is_MP: true,
     is_pharma: false,
   });
 
@@ -58,12 +58,16 @@ const RegisterScreen = () => {
     <>
       <div className="sec-home-body-container">
         <div className="login-content-inner">
+       
           <img className="auth-img" src={registrationimg} alt="#" />
           <div className="auth-inner">
             <form onSubmit={handleSubmit}>
-              <h4 className="align-centre roboto-font">
-                <span class="material-icons">person_add </span>Registeration
-              </h4>
+              <h5 className="align-centre roboto-font">
+                <span class="material-icons">person_add </span>Doctor's Registeration
+              </h5>
+              <div class="alert alert-warning" role="alert">
+                Kindly avoid registeration, if you are not a Doctor.
+              </div>
               <div className="form-group">
                 <label className="font-small">Username</label>
                 <input
@@ -111,26 +115,10 @@ const RegisterScreen = () => {
                   value={input.password}
                 />
               </div>
-{/* 
-              <div className="form-group">
-                <div className="row align-centre">
-                  <label className="col font-small">
-                    Want to register as Medical Practitioner?
-                  </label>
-                  <input
-                    type="checkbox"
-                    className="checkbox-container col"
-                    placeholder="Click only if you are Medical Practitioner"
-                    name="is_MP"
-                    checked={input.is_MP}
-                    onChange={onChangeHandler}
-                  />
-                </div>
-              </div> */}
-
               <button type="submit" className="btn btn-dark btn-sm">
                 Register
               </button>
+                
             </form>
           </div>
         </div>
@@ -139,4 +127,4 @@ const RegisterScreen = () => {
   );
 };
 
-export default RegisterScreen;
+export default DoctorRegisterScreen;
